@@ -22,7 +22,29 @@ namespace API.Controllers
             _configuration = configuration;
         }
 
+        //API method to get User details
+        [HttpGet]
+        public JsonResult Get()
+        {
+            string query = "@select userId, firstName from dbo.Users";
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("UserAppCon");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
 
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+
+            return new JsonResult(table);
+        }
 
 
     }
