@@ -28,7 +28,7 @@ namespace API.Controllers
         {
             string query = "@select userId, firstName from dbo.Users";
             DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("UserAppCon");
+            string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
             SqlDataReader myReader;
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
             {
