@@ -26,7 +26,7 @@ namespace API.Controllers
         [HttpGet]
         public JsonResult Get()
         {
-            string query = "@select userId, firstName from dbo.Users";
+            string query = "@select userId, firstName, lastName, address, city, phoneNumber, adminStatus from dbo.Users";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
             SqlDataReader myReader;
